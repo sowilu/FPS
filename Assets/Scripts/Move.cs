@@ -32,7 +32,7 @@ public class Move : MonoBehaviour
         var move = (transform.right * x + transform.forward * z) * speed * Time.deltaTime;
         
         //jump
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             y = Mathf.Sqrt(jumpHeight * -2f * gravity) * Time.deltaTime;
         }
