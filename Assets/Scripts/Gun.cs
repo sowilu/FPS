@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    public Transform muzzle;
     public GameObject bulletPrefab;
     
     public float cooldown = 0.3f;
@@ -25,10 +26,10 @@ public class Gun : MonoBehaviour
         if (currentAmmo > 0 && canShoot && Input.GetMouseButtonDown(0))
         {
             currentAmmo--;
-            Instantiate(bulletPrefab, transform.position, transform.rotation);
+            Instantiate(bulletPrefab, muzzle.position, transform.rotation);
             StartCoroutine(Cooldown());
         }
-        else if (currentAmmo == 0)
+        else if (currentAmmo == 0 && canShoot && Input.GetMouseButtonDown(0))
         {
             StartCoroutine(Reload());
         }
