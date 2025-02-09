@@ -22,8 +22,9 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        print($"Hit {other.gameObject.name} for {Random.Range(damageRange.x, damageRange.y)}");
-        
+        //print($"Hit {other.gameObject.name} for {Random.Range(damageRange.x, damageRange.y)}");
+        var damage = Random.Range(damageRange.x, damageRange.y);
+        DamageIndicator.instance.DisplayDamage((int)damage, transform.position);
         Destroy(gameObject);
     }
 }
