@@ -23,6 +23,12 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         var damage = Random.Range(damageRange.x, damageRange.y);
-        print($"Hit {other.gameObject} for {damage} damage");
+        //print($"Hit {other.gameObject} for {damage} damage");
+        DamageIndicatorManager.instance.ShowDamageIndicator((int)damage, transform.position);
+        
+        var enemy = other.gameObject.GetComponent<Enemy>();
+        if(enemy !=null) enemy.Die();
+        
+        Destroy(gameObject);
     }
 }
