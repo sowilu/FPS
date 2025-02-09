@@ -19,6 +19,13 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         //todo: check for health
-        print($"Bullet Hit: {other.gameObject.name}, dealt: {Random.Range(-damageRange.x, damageRange.x)}");
+        //print($"Bullet Hit: {other.gameObject.name}, dealt: {Random.Range(-damageRange.x, damageRange.x)}");
+        var damage = (int)Random.Range(damageRange.x, damageRange.y);
+        DamageManager.instance.ShowDamage(damage, transform.position);
+        
+        var enemy = other.gameObject.GetComponent<Enemy>();
+        if(enemy !=null) enemy.Die();
+        
+        Destroy(gameObject);
     }
 }

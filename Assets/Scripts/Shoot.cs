@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
+    public Transform muzzle;
     public Transform cam;
     
     public GameObject bulletPrefab;
@@ -15,11 +16,6 @@ public class Shoot : MonoBehaviour
     public int currentAmmo = 6;
 
     private bool canShoot = true;
-    
-    void Start()
-    {
-        
-    }
 
 
     void Update()
@@ -27,10 +23,10 @@ public class Shoot : MonoBehaviour
         if (currentAmmo > 0 && canShoot && Input.GetMouseButtonDown(0))
         {
             currentAmmo--;
-            Instantiate(bulletPrefab, transform.position, cam.rotation);
+            Instantiate(bulletPrefab, muzzle.position, cam.rotation);
             StartCoroutine(Cooldown());
         }
-        else if (currentAmmo == 0)
+        else if (currentAmmo == 0 && canShoot && Input.GetMouseButtonDown(0))
         {
             StartCoroutine(Reload());
         }
