@@ -21,7 +21,10 @@ public class Bullet : MonoBehaviour
         if (other.transform.CompareTag("Player")) return;
         
         //todo: deal damage
-        print($"Hit {other.gameObject.name} for {Random.Range(damageRange.x, damageRange.y)} damage");
+        //print($"Hit {other.gameObject.name} for {Random.Range(damageRange.x, damageRange.y)} damage");
+
+        var damage = Random.Range(damageRange.x, damageRange.y);
+        DamageIndicatorManager.instance.ShowDamageIndicator((int)damage, transform.position);
         
         Destroy(gameObject);
     }
