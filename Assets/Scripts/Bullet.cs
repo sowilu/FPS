@@ -23,8 +23,8 @@ public class Bullet : MonoBehaviour
         var damage = (int)Random.Range(damageRange.x, damageRange.y);
         DamageManager.instance.ShowDamage(damage, transform.position);
         
-        var enemy = other.gameObject.GetComponent<Enemy>();
-        if(enemy !=null) enemy.Die();
+        var health = other.gameObject.GetComponent<Health>();
+        if(health !=null) health.TakeDamage(damage);
         
         Destroy(gameObject);
     }

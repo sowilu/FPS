@@ -22,8 +22,20 @@ public class Shoot : MonoBehaviour
     {
         if (currentAmmo > 0 && canShoot && Input.GetMouseButtonDown(0))
         {
+            //create bullet
             currentAmmo--;
-            Instantiate(bulletPrefab, muzzle.position, cam.rotation);
+            var bullet = Instantiate(bulletPrefab, muzzle.position, cam.rotation);
+            
+            //raycast for target
+            var screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+            var ray = Camera.main.ScreenPointToRay(screenCenter);
+
+            if (Physics.Raycast(ray, out var hit))
+            {
+                //rotate bullet towards target
+                bullet.transform.LookAt(hit.point);
+            }
+            
             StartCoroutine(Cooldown());
         }
         else if (currentAmmo == 0 && canShoot && Input.GetMouseButtonDown(0))

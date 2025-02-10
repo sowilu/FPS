@@ -1,10 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
+    public Image hurtImage;
     public LayerMask groundLayer;
     public Transform feet;
     public float speed = 7;
@@ -51,5 +51,15 @@ public class Move : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(feet.position, 0.4f);
         }
+    }
+
+    public void Die()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void GetHurt()
+    {
+        hurtImage.color = new Color(1, 1, 1, hurtImage.color.a + 0.1f);
     }
 }
