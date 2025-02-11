@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
         DamageIndicatorManager.instance.ShowDamageIndicator((int)damage, transform.position);
         
         var enemy = other.gameObject.GetComponent<Enemy>();
-        if(enemy !=null) enemy.Die();
+        if(enemy !=null) enemy.TakeDamage((int)damage);
         
         Destroy(gameObject);
     }

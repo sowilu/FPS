@@ -27,7 +27,15 @@ public class Gun : MonoBehaviour
             if (magazine > 0)
             {
                 magazine--;
-                Instantiate(bulletPrefab, muzzle.position, transform.rotation);
+                var bullet = Instantiate(bulletPrefab, muzzle.position, transform.rotation);
+                
+                var screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+                var ray = Camera.main.ScreenPointToRay(screenCenter);
+                if (Physics.Raycast(ray, out var hit))
+                {
+                    bullet.transform.LookAt(hit.point);
+                }
+                
                 StartCoroutine(Cooldown());
             }
             else
