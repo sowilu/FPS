@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,6 +21,8 @@ public class Zombie : MonoBehaviour
 
     void Update()
     {
+        animator.SetFloat("speed", agent.velocity.magnitude);
+        
         var distance = Vector3.Distance(transform.position, target.position);
         
         if (distance >= runDistance) agent.speed = runSpeed;
@@ -27,9 +30,22 @@ public class Zombie : MonoBehaviour
         
         animator.SetBool("run", distance >= runDistance);
         
-        if (target != null)
+        if (target != null && agent.enabled)
         {
             agent.SetDestination(target.position);
         }
+    }
+
+    public void GetHurt()
+    {
+        animator.Play("Pain");
+        StartCoroutine(StopAndWait());
+    }
+
+    IEnumerator StopAndWait()
+    {
+        agent.enabled = false;
+        yield return new WaitForSeconds(2);
+        agent.enabled = true;
     }
 }
